@@ -73,6 +73,24 @@ coffee-script as long as you have these preprocessors running on your app.
 </div>
 ```
 
+You can also write components that accept block:
+
+```erb
+<!-- app/components/form/_form.html.erb -->
+<%= form_for(params) do |f| %>
+  <%= yield f %>
+<% end %>
+```
+
+And use the component like this:
+
+```erb
+<%= render_component "form", params: { for: @user, method: :_post } do |f| %>
+  <%= f.text_field :username %>
+  <%= f.submit %>
+<% end %>
+```
+
 ```ruby
 # app/components/header/header_component.rb
 class HeaderComponent < MountainView::Presenter
@@ -101,6 +119,15 @@ helper:
 
 ```erb
 <%= render_component "header", title: "This is a title", subtitle: "And this is a subtitle" %>
+```
+
+You can also use `render_component` with block:
+
+```erb
+<%= render_component "horizontal_form_for", params: { resource: @user, url: users_path, method: :post } do |f| %>
+  <%= render_component "form_input", form: f, label: "Input Label" %>
+  <%= render_component "submit", form: f, label: "Save" %>
+<% end %>
 ```
 
 ### Assets
