@@ -1,6 +1,4 @@
-<% MountainView.configuration.included_javascripts.each do |included_javascript| %>
-  <%= require_asset included_javascript %>
-<% end %>
+//= require shared_scripts
 <% if Dir.exist?(MountainView.configuration.components_path) %>
   <% depend_on MountainView.configuration.components_path.to_s %>
   <% Dir.glob(MountainView.configuration.components_path.join('*')).each do |component_dir|
